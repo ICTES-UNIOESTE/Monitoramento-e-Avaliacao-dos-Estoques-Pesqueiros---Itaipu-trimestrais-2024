@@ -591,9 +591,9 @@ sum(sort(cpuePercentualN["Geral",], decreasing=TRUE)[2:4])
 sort(cpuePercentualN["Fluvial",], decreasing=TRUE)[1]
 Ordem <- order(Geral,decreasing = TRUE)
 jpeg(filename = "CPUE Número.jpeg",
-     width = 18, height = 13, units = "cm", pointsize = 12,
+     width = 18, height = 15, units = "cm", pointsize = 12,
      quality = 100, res=300)
-par(mfrow=c(4,1), oma=c(10,5,1,0), mar=c(0,0,1,0))
+par(mfrow=c(4,1), oma=c(13,5,1,0), mar=c(0,0,1,0))
 Ylim=c(0,ceiling(max(cpueZonaSppN)))
 barplot(as.matrix(cpueZonaSppN[4,Ordem]), horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="yellow1") #000000"
 mtext("GERAL",side=3,line=-1)
@@ -629,7 +629,7 @@ Ordem <- order(GeralB,decreasing = TRUE)
 jpeg(filename = "CPUE Biomassa.jpeg",
      width = 18, height = 13, units = "cm", pointsize = 12,
      quality = 100, res=300)
-par(mfrow=c(4,1), oma=c(10,5,1,0), mar=c(0,0,1,0))
+par(mfrow=c(4,1), oma=c(13,5,1,0), mar=c(0,0,1,0))
 Ylim=c(0,ceiling(max(cpueZonaSppB)/1000))
 barplot(as.matrix(cpueZonaSppB[4,Ordem])/1000, horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="yellow1")
 mtext("GERAL",side=3,line=-1)
