@@ -580,6 +580,15 @@ nPescador <- sum(nPescadorZona)
 Geral <- nSpp$Seq/nPescador
 unique(BioJuAg23$Ponto)
 cpueZonaSppN <- rbind.data.frame(cpueZonaSppN,Geral)
+
+# %%%% das abundâncias das spp
+# Calculating the row sums
+row_sums <- rowSums(cpueZonaSppN, na.rm = TRUE)
+
+# Calculating the percentage for each cell
+percentage_data <- sweep(cpueZonaSppN, 1, row_sums, "/") * 100
+percentage_data # olhar visualmente para colocar no texto
+
 rownames(cpueZonaSppN)[4] <- "Geral"
 round(t(cpueZonaSppN),3)
 cpuePercentualN <- decostand(cpueZonaSppN, method="total")*100
