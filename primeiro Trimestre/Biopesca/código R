@@ -593,6 +593,12 @@ percentage_data<-as.data.frame(percentage_data)
 
 row.names(percentage_data)<-c("Fluvial","Lacustre","Transição","Geral")
 
+# Add row names as a column named "Espécie"
+percentage_data$Zonas <- rownames(percentage_data)
+
+# Reorder the columns with "Espécie" as the first column
+percentage_data <- percentage_data[, c("Zonas", names(percentage_data)[names(percentage_data) != "Zonas"])]
+
 write.xlsx(percentage_data, "Porcentagem abund. número.xlsx")
 
 
@@ -644,6 +650,12 @@ percentage_data # olhar visualmente para colocar no texto
 percentage_data<-as.data.frame(percentage_data)
 
 row.names(percentage_data)<-c("Fluvial","Lacustre","Transição","Geral")
+
+# Add row names as a column named "Espécie"
+percentage_data$Zonas <- rownames(percentage_data)
+
+# Reorder the columns with "Espécie" as the first column
+percentage_data <- percentage_data[, c("Zonas", names(percentage_data)[names(percentage_data) != "Zonas"])]
 
 write.xlsx(percentage_data, "Porcentagem abund. biomassa.xlsx")
 
