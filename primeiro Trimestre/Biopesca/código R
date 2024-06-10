@@ -586,22 +586,22 @@ cpuePercentualN <- decostand(cpueZonaSppN, method="total")*100
 cpuePercentualN <- as.matrix(cpuePercentualN)
 t(cpuePercentualN[,order(cpuePercentualN["Geral",])])
 
-round(sort(cpuePercentualN["Geral",], decreasing=TRUE),3)
-sort(cpuePercentualN["Geral",], decreasing=TRUE)[2:4]
+sort(cpuePercentualN["Geral",], decreasing=TRUE)[1]
+sum(sort(cpuePercentualN["Geral",], decreasing=TRUE)[2:4])
 sort(cpuePercentualN["Fluvial",], decreasing=TRUE)[1]
 Ordem <- order(Geral,decreasing = TRUE)
 jpeg(filename = "CPUE Número.jpeg",
      width = 18, height = 15, units = "cm", pointsize = 12,
      quality = 100, res=300)
-par(mfrow=c(4,1), oma=c(11,5,1,0), mar=c(0,0,1,0))
+par(mfrow=c(4,1), oma=c(13,5,1,0), mar=c(0,0,1,0))
 Ylim=c(0,ceiling(max(cpueZonaSppN)))
-barplot(as.matrix(cpueZonaSppN[4,Ordem]), horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="yellow1", cex.names = .8) #000000"
+barplot(as.matrix(cpueZonaSppN[4,Ordem]), horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="yellow1") #000000"
 mtext("GERAL",side=3,line=-1)
-barplot(as.matrix(cpueZonaSppN[1,Ordem]), horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col= "#009241", cex.names = .8) #009241
+barplot(as.matrix(cpueZonaSppN[1,Ordem]), horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col= "#009241") #009241
 mtext("FLUVIAL",side=3,line=-1)
-barplot(as.matrix(cpueZonaSppN[3,Ordem]), horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="#da2420", cex.names = .8) #da2420
+barplot(as.matrix(cpueZonaSppN[3,Ordem]), horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="#da2420") #da2420
 mtext("TRANSIÇÃO",side=3,line=-1)
-barplot(as.matrix(cpueZonaSppN[2,Ordem]), horiz=F, las=3, font.axis=3,beside = TRUE, ylim=Ylim, col="#045e9a", cex.names = .8) #045e9a
+barplot(as.matrix(cpueZonaSppN[2,Ordem]), horiz=F, las=3, font.axis=3,beside = TRUE, ylim=Ylim, col="#045e9a") #045e9a
 mtext("LACUSTRE",side=3,line=-1)
 mtext("CPUE (Ind/Pescador)",side=2,line=3,outer=TRUE)
 dev.off()
@@ -618,10 +618,10 @@ GeralB <- bSpp$Peso.total..g./bPescador
 cpueZonaSppB <- rbind.data.frame(cpueZonaSppB,GeralB)
 rownames(cpueZonaSppB)[4] <- "Geral"
 round(t(cpueZonaSppB),3)
+
 cpuePercentualB <- decostand(cpueZonaSppB, method="total")*100
 cpuePercentualB <- as.matrix(cpuePercentualB)
 t(cpuePercentualB[,order(cpuePercentualB["Geral",])])
-
 round(sort(cpuePercentualB["Geral",], decreasing=TRUE),3)
 sort(cpuePercentualB["Geral",], decreasing=TRUE)[2:4]
 sort(cpuePercentualB["Fluvial",], decreasing=TRUE)[1]
@@ -629,15 +629,15 @@ Ordem <- order(GeralB,decreasing = TRUE)
 jpeg(filename = "CPUE Biomassa.jpeg",
      width = 18, height = 13, units = "cm", pointsize = 12,
      quality = 100, res=300)
-par(mfrow=c(4,1), oma=c(11,5,1,0), mar=c(0,0,1,0))
+par(mfrow=c(4,1), oma=c(13,5,1,0), mar=c(0,0,1,0))
 Ylim=c(0,ceiling(max(cpueZonaSppB)/1000))
-barplot(as.matrix(cpueZonaSppB[4,Ordem])/1000, horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="yellow1", cex.names = .8)
+barplot(as.matrix(cpueZonaSppB[4,Ordem])/1000, horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="yellow1")
 mtext("GERAL",side=3,line=-1)
-barplot(as.matrix(cpueZonaSppB[1,Ordem])/1000, horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="#009241", cex.names = .8)
+barplot(as.matrix(cpueZonaSppB[1,Ordem])/1000, horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="#009241")
 mtext("FLUVIAL",side=3,line=-1)
-barplot(as.matrix(cpueZonaSppB[3,Ordem])/1000, horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="#da2420", cex.names = .8)
+barplot(as.matrix(cpueZonaSppB[3,Ordem])/1000, horiz=F, las=3, font.axis=3,beside = TRUE, xaxt="n", ylim=Ylim, col="#da2420")
 mtext("TRANSIÇÃO",side=3,line=-1)
-barplot(as.matrix(cpueZonaSppB[2,Ordem])/1000, horiz=F, las=3, font.axis=3,beside = TRUE, ylim=Ylim, col="#045e9a", cex.names = .8)
+barplot(as.matrix(cpueZonaSppB[2,Ordem])/1000, horiz=F, las=3, font.axis=3,beside = TRUE, ylim=Ylim, col="#045e9a")
 mtext("LACUSTRE",side=3,line=-1)
 mtext("CPUE (kg/Pescador)",side=2,line=3,outer=TRUE)
 dev.off()
@@ -688,20 +688,45 @@ mtext("Frequência (Número de indivíduos)", side=2, line=3, outer=T, cex=1.25)
 dev.off()
 
 # Peso Comprimento, max e min ####
-TabParametros <- matrix(NA, nrow=length(Spp), ncol=6)
-colnames(TabParametros) <- c("CP.min", "CP.max", "PT.min", "PT.max","a","b")
+TabParametros <- matrix(NA, nrow=length(Spp), ncol=12)
+colnames(TabParametros) <- c("CP.min", "CP.max", "WT.min", "WT.max","a","b","2,5%","97,5%","% fêmeas","% machos", "% jovens","% adultos")
 rownames(TabParametros) <- Spp
+i=1
 for(i in 1:length(Spp)){
-  TabParametros[i,1:2] <- range(BioJuAg23$CP[BioJuAg23$Espécie==Spp[i]], na.rm=TRUE)
-  TabParametros[i,3:4] <- range(BioJuAg23$Peso.total..g.[BioJuAg23$Espécie==Spp[i]], na.rm=TRUE)
-  x <- BioJuAg23$CP[BioJuAg23$Espécie==Spp[i]]
-  y <- BioJuAg23$Peso.total..g.[BioJuAg23$Espécie==Spp[i]]
-  if(length(y)>20){
-    WT_LT <- lm(log10(y)~log10(x))
-    TabParametros[i,5] <- round(10^WT_LT$coefficients[1],4)
-    TabParametros[i,6] <- round(WT_LT$coefficients[2],4)
+  tryCatch({
+    TabParametros[i, 1:2] <- range(BioJuAg23$CP[BioJuAg23$Espécie == Spp[i]], na.rm = TRUE)
+    TabParametros[i, 3:4] <- range(BioJuAg23$Peso.total..g.[BioJuAg23$Espécie == Spp[i]], na.rm = TRUE)
+    
+    x <- BioJuAg23$CP[BioJuAg23$Espécie == Spp[i]]
+    y <- BioJuAg23$Peso.total..g.[BioJuAg23$Espécie == Spp[i]]
+    
+    if(length(y) > 20){
+      WT_LT <- lm(log10(y) ~ log10(x))
+      TabParametros[i, 5] <- round(10^WT_LT$coefficients[1], 4)
+      TabParametros[i, 6] <- round(WT_LT$coefficients[2], 4)
+      Resumo=summary(WT_LT)
+      EP=Resumo$coefficients[2,2]
+      parametros=cbind(Resumo$coefficients[,1],confint(WT_LT))
+      TabParametros[i, 7] <- parametros[2,2]
+      TabParametros[i, 8] <- parametros[2,3]
     }
+    
+    gender_counts <- BioJuAg23$Sexo[BioJuAg23$Espécie == Spp[i]]
+    gender_counts <- na.omit(gender_counts)
+    TabParametros[i, 9] <- (sum(gender_counts == "F", na.rm = TRUE) / length(gender_counts)) * 100
+    TabParametros[i, 10] <- (sum(gender_counts == "M", na.rm = TRUE) / length(gender_counts)) * 100
+    
+    maturidade <- BioJuAg23$Estagio[BioJuAg23$Espécie == Spp[i]]
+    TabParametros[i, 11] <- (sum(maturidade == "IMT", na.rm = TRUE) / length(maturidade)) * 100
+    
+    count <- maturidade[maturidade != "IMT"]
+    TabParametros[i, 12] <- (length(count) / length(maturidade)) * 100
+  }, error = function(e) {
+    cat("Error occurred for species:", Spp[i], "\n")
+    TabParametros[i, ] <- NA
+  })
 }
+
 TabParametros
 TabParametros<-as.data.frame(TabParametros)
 TabParametros$CP.min[is.infinite(TabParametros$CP.min)] <- NA
