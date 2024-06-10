@@ -770,15 +770,35 @@ for(i in 1:length(Spp)){
   })
 }
 
-TabParametros
-TabParametros<-as.data.frame(TabParametros)
-TabParametros$CP.min[is.infinite(TabParametros$CP.min)] <- NA
-TabParametros$CP.max[is.infinite(TabParametros$CP.max)] <- NA
-# Add row names as a column named "Espécie"
-TabParametros$Espécie <- rownames(TabParametros)
+Zones <- unique(BioJuAg23$Zona)
+TabParametros2 <- expand.grid(Espécie=Spp, Zona=Zones)
+TabParametros2$CP <- NA  # Initialize CP_medio with NA
+
+
+# Calculate the mean CP for each species and zone
+mean_CP <- aggregate(CP ~ Espécie + Zona, data=BioJuAg23, FUN=mean, na.rm=TRUE)
+mean_CP
+# Merge the calculated mean CP with the TabParametros2 data frame
+TabParametros2 <- merge(TabParametros2, mean_CP, by=c("Espécie", "Zona"), all.x=TRUE)
+
+mean_CP_by_zone <- aggregate(CP.y ~ Zona, data=TabParametros2, FUN=mean, na.rm=TRUE)
+
+TabParametros2 <-as.data.frame(TabParametros2)
+TabParametros2$Espécie <- rownames(TabParametros2)
 
 # Reorder the columns with "Espécie" as the first column
-TabParametros <- TabParametros[, c("Espécie", names(TabParametros)[names(TabParametros) != "Espécie"])]
+TabParametros2 <- TabParametros2[, c("Espécie", names(TabParametros2)[names(TabParametros2) != "Espécie"])]
+
+TabParametros2<-as.data.frame(TabParametros2)
+
+TabParametros2<-TabParametros2[,-3]
+
+colnames(TabParametros2)<-c("Espécie","Zona","CP médio")
+
+
+# Add row names as a column named "Espécie"
+TabParametros2$Espécie <- rownames(TabParametros2)
+
 
 write.xlsx(TabParametros, "Parametros espécies.xlsx")
 
