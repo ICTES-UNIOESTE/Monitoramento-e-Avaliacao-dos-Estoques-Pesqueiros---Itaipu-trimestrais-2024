@@ -11,8 +11,8 @@ BioJuAg23 <- data.frame(read_xlsx("Biopesca Primeiro trimestre 2024.xlsx", sheet
 #Fam <- levels(factor(BioJuAg23$Familia))
 Spp <- levels(factor(BioJuAg23$Espécie))
 #Comp <- levels(factor(interaction(BioJuAg23$Ordem,
- #                         BioJuAg23$Familia,
-  #                        BioJuAg23$Genero)))
+#                         BioJuAg23$Familia,
+#                        BioJuAg23$Genero)))
 #Comp
 BioJuAg23$Mes <- format(BioJuAg23$Data, "%b %Y") # Data em (mmm aaaa)
 BioJuAg23$Seq <- seq(nrow(BioJuAg23))
@@ -82,8 +82,8 @@ replacement_names <- c("Bocudo","Bocudo","Luz-baixa","Tucunaré","Tucunaré","Ca
 
 # Substitute names in Espécie column
 Preco$Espécie <- ifelse(Preco$Espécie %in% names_to_replace,
-                       replacement_names[match(Preco$Espécie, names_to_replace)],
-                       Preco$Espécie)
+                        replacement_names[match(Preco$Espécie, names_to_replace)],
+                        Preco$Espécie)
 
 # Filter out lines where Espécie is not in the list of replacement names
 Preco <- Preco[Preco$Espécie %in% replacement_names, ]
@@ -589,6 +589,13 @@ row_sums <- rowSums(cpueZonaSppN, na.rm = TRUE)
 percentage_data <- sweep(cpueZonaSppN, 1, row_sums, "/") * 100
 percentage_data # olhar visualmente para colocar no texto
 
+percentage_data<-as.data.frame(percentage_data)
+
+row.names(percentage_data)<-c("Fluvial","Lacustre","Transição","Geral")
+
+write.xlsx(percentage_data, "Porcentagem abund. número.xlsx")
+
+
 rownames(cpueZonaSppN)[4] <- "Geral"
 round(t(cpueZonaSppN),3)
 cpuePercentualN <- decostand(cpueZonaSppN, method="total")*100
@@ -625,6 +632,21 @@ bSpp <- aggregate(Peso.total..g. ~ Espécie, data=BioJuAg23, sum, na.rm=T)
 bPescador <- sum(bPescadorZona)
 GeralB <- bSpp$Peso.total..g./bPescador
 cpueZonaSppB <- rbind.data.frame(cpueZonaSppB,GeralB)
+
+# %%%% das abundâncias das spp
+# Calculating the row sums
+row_sums <- rowSums(cpueZonaSppB, na.rm = TRUE)
+
+# Calculating the percentage for each cell
+percentage_data <- sweep(cpueZonaSppB, 1, row_sums, "/") * 100
+percentage_data # olhar visualmente para colocar no texto
+
+percentage_data<-as.data.frame(percentage_data)
+
+row.names(percentage_data)<-c("Fluvial","Lacustre","Transição","Geral")
+
+write.xlsx(percentage_data, "Porcentagem abund. biomassa.xlsx")
+
 rownames(cpueZonaSppB)[4] <- "Geral"
 round(t(cpueZonaSppB),3)
 
