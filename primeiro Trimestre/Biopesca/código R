@@ -38,7 +38,7 @@ names_to_replace <- c("Ageneiosus inermis","Ageneiosus ucayalensis", "Auchenipte
 
 # Define corresponding replacement names
 replacement_names <- c("Bocudo","Bocudo","Luz-baixa","Tucunaré","Tucunaré","Cará","Bananinha","Traíra","Traíra","Perna-de-moça","Cascudo","Cascudo",
-                       "Mandi","Piau","Piau","Piau","Cascudo","Piauçu","Piapara","Piapara","Mandi","Mandi","Mandi","Barbado","Curvina","Raia",
+                       "Mandi","Piau","Piau","Piau","Cascudo","Piauçu","Piapara","Piapara","Mandi","Mandi","Mandi","Barbado","Corvina","Raia",
                        "Raia","Curimba","Pintado","Armado","Cascudo","Dourado-cachorro","Cará","Piau","Piau","Piranha","Piranha","Piranha")
 
 #Ageneiosus inermis <- Bocudo
@@ -175,7 +175,7 @@ names_to_replace <- c("Ageneiosus inermis","Ageneiosus ucayalensis", "Auchenipte
 
 # Define corresponding replacement names
 replacement_names <- c("Bocudo","Bocudo","Luz-baixa","Tucunaré","Tucunaré","Cará","Bananinha","Traíra","Traíra","Perna-de-moça","Cascudo","Cascudo",
-                       "Mandi","Piau","Piau","Piau","Cascudo","Piauçu","Piapara","Piapara","Mandi","Mandi","Mandi","Barbado","Curvina","Raia",
+                       "Mandi","Piau","Piau","Piau","Cascudo","Piauçu","Piapara","Piapara","Mandi","Mandi","Mandi","Barbado","Corvina","Raia",
                        "Raia","Curimba","Pintado","Armado","Cascudo","Dourado-cachorro","Cará","Piau","Piau","Piranha","Piranha","Piranha")
 
 #Ageneiosus inermis <- Bocudo
@@ -313,7 +313,7 @@ names_to_replace <- c("Ageneiosus inermis","Ageneiosus ucayalensis", "Auchenipte
 
 # Define corresponding replacement names
 replacement_names <- c("Bocudo","Bocudo","Luz-baixa","Tucunaré","Tucunaré","Cará","Bananinha","Traíra","Traíra","Perna-de-moça","Cascudo","Cascudo",
-                       "Mandi","Piau","Piau","Piau","Cascudo","Piauçu","Piapara","Piapara","Mandi","Mandi","Mandi","Barbado","Curvina","Raia",
+                       "Mandi","Piau","Piau","Piau","Cascudo","Piauçu","Piapara","Piapara","Mandi","Mandi","Mandi","Barbado","Corvina","Raia",
                        "Raia","Curimba","Pintado","Armado","Cascudo","Dourado-cachorro","Cará","Piau","Piau","Piranha","Piranha","Piranha")
 
 #Ageneiosus inermis <- Bocudo
@@ -451,7 +451,7 @@ names_to_replace <- c("Ageneiosus inermis","Ageneiosus ucayalensis", "Auchenipte
 
 # Define corresponding replacement names
 replacement_names <- c("Bocudo","Bocudo","Luz-baixa","Tucunaré","Tucunaré","Cará","Bananinha","Traíra","Traíra","Perna-de-moça","Cascudo","Cascudo",
-                       "Mandi","Piau","Piau","Piau","Cascudo","Piauçu","Piapara","Piapara","Mandi","Mandi","Mandi","Barbado","Curvina","Raia",
+                       "Mandi","Piau","Piau","Piau","Cascudo","Piauçu","Piapara","Piapara","Mandi","Mandi","Mandi","Barbado","Corvina","Raia",
                        "Raia","Curimba","Pintado","Armado","Cascudo","Dourado-cachorro","Cará","Piau","Piau","Piranha","Piranha","Piranha")
 
 #Ageneiosus inermis <- Bocudo
