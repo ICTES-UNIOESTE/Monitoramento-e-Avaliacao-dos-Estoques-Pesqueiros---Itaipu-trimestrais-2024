@@ -760,9 +760,11 @@ for(i in 1:length(Spp)){
     TabParametros[i, 10] <- (sum(gender_counts == "M", na.rm = TRUE) / length(gender_counts)) * 100
     
     maturidade <- BioJuAg23$Estagio[BioJuAg23$Espécie == Spp[i]]
+    maturidade <- na.omit(maturidade)
     TabParametros[i, 11] <- (sum(maturidade == "IMT", na.rm = TRUE) / length(maturidade)) * 100
     
     count <- maturidade[maturidade != "IMT"]
+    count <- na.omit(count)
     TabParametros[i, 12] <- (length(count) / length(maturidade)) * 100
   }, error = function(e) {
     cat("Error occurred for species:", Spp[i], "\n")
@@ -798,7 +800,6 @@ colnames(TabParametros2)<-c("Espécie","Zona","CP médio")
 
 # Add row names as a column named "Espécie"
 TabParametros2$Espécie <- rownames(TabParametros2)
-
 
 write.xlsx(TabParametros, "Parametros espécies.xlsx")
 
