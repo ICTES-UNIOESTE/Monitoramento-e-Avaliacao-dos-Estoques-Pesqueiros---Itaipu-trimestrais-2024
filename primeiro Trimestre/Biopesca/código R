@@ -772,6 +772,19 @@ for(i in 1:length(Spp)){
   })
 }
 
+TabParametros[is.nan(TabParametros) | is.infinite(TabParametros)] <- NA
+
+TabParametros<-as.data.frame(TabParametros)
+
+TabParametros$Espécie <- rownames(TabParametros)
+
+# Reorder the columns with "Espécie" as the first column
+TabParametros <- TabParametros[, c("Espécie", names(TabParametros)[names(TabParametros) != "Espécie"])]
+
+TabParametros<-as.data.frame(TabParametros)
+
+write.xlsx(TabParametros, "Parametros especies.xlsx")
+
 Zones <- unique(BioJuAg23$Zona)
 TabParametros2 <- expand.grid(Espécie=Spp, Zona=Zones)
 TabParametros2$CP <- NA  # Initialize CP_medio with NA
@@ -801,7 +814,7 @@ colnames(TabParametros2)<-c("Espécie","Zona","CP médio")
 # Add row names as a column named "Espécie"
 TabParametros2$Espécie <- rownames(TabParametros2)
 
-write.xlsx(TabParametros, "Parametros espécies.xlsx")
+
 
 # Reprodução #####
 repG <- table(BioJuAg23$Estagio)[c(2,3,5,1,4)]
