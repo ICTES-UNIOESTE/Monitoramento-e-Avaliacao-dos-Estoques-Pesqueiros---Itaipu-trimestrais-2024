@@ -1,57 +1,4 @@
-Skip to content
-Navigation Menu
-ICTES-UNIOESTE
-/
-Monitoramento-e-Avaliacao-dos-Estoques-Pesqueiros---Itaipu-trimestrais-2024
-
-Type / to search
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-Files
-Go to file
-t
-primeiro Trimestre/Biopesca
-Alimentação.jpeg
-CPUE Biomassa.jpeg
-CPUE Número.jpeg
-Diversidade e Equitabilidade.jpeg
-Parametros especies.xlsx
-Pescados em filé para peixeiro.jpeg
-Pescados em filé particular.jpeg
-Pescados inteiros para peixeiro.jpeg
-Pescados inteiros particular.jpeg
-Porcentagem abund. biomassa.xlsx
-Porcentagem abund. número.xlsx
-Reprodução.jpeg
-Tamanhos.jpeg
-código R
-primeiro trimestre/Rendimento
-segundo Trimestre
-Biopesca
-BreadcrumbsMonitoramento-e-Avaliacao-dos-Estoques-Pesqueiros---Itaipu-trimestrais-2024/primeiro Trimestre/Biopesca
-/código R
-Latest commit
-ICTES-UNIOESTE
-ICTES-UNIOESTE
-Update código R
-9ad9fc8
- · 
-3 months ago
-History
-File metadata and controls
-
-Code
-
-Blame
-855 lines (705 loc) · 37.3 KB
-# Biopesca junho a agosto de 2023 ####
+# Biopesca tri 2, 2024####
 rm()
 setwd("C:/Users/lg_ri/Dropbox/Postdoc/UNIOESTE/Relatórios Itaipu/R biopesca/Trimestral 2024")
 library(readxl)
@@ -905,4 +852,3 @@ mtext(side=2, line=4, at=mean(x1), text = "Grau de Repleção", cex=1.25,las=3)
 axis(side=2, at=x1, labels=rep(rownames(aliMat),4), cex=0.7,las=2)
 mtext("Frequência (Número de indivíduos)", side=1, line=3, cex=1.25)
 dev.off()
-Monitoramento-e-Avaliacao-dos-Estoques-Pesqueiros---Itaipu-trimestrais-2024/primeiro Trimestre/Biopesca/código R at main · ICTES-UNIOESTE/Monitoramento-e-Avaliacao-dos-Estoques-Pesqueiros---Itaipu-trimestrais-2024
