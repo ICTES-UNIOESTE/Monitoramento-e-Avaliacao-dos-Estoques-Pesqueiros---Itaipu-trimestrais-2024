@@ -1,6 +1,6 @@
 # socioeconomico 2023 ####
 rm()
-setwd("C:/Users/lg_ri/Dropbox/Postdoc/UNIOESTE/Relatórios Itaipu/R rendimento/Trimestral 2024")
+setwd("C:/Users/lg_ri/Dropbox/Postdoc/UNIOESTE/Relatórios Itaipu/R rendimento/Trimestral 2 2024")
 library(readxl)
 library(vegan)
 library(tidyr)
@@ -9,7 +9,7 @@ library(ggplot2)
 library(openxlsx)
 library(ggrepel)
 library(lubridate)
-rendimento <- data.frame(read_xlsx("Rendimento Primeiro trimestre 2024 - Relatório.xlsx", sheet="Banco de dados"))
+rendimento <- data.frame(read_xlsx("Rendimento março a agosto de 2024.xlsx", sheet="Banco de dados"))
 rendimento$DATA <-as.Date(rendimento$DATA, format = "%d/%m/%Y") # Data em (mmm aaaa)
 rendimento$Seq <- seq(nrow(rendimento))
 
@@ -239,27 +239,27 @@ mtext("CPUE: kg/pescador/dia", side=2, line=3, outer=T, cex=1.25)
 ########
 ####
 
-nspp<- aggregate(Seq ~ ESPÉCIES+CPUE..kg.m2.rede., data=rendimento, length)
+nspp<- aggregate(Seq ~ ESPÉCIES+CPUE..kg.m..rede., data=rendimento, length)
 
 # Remove rows with NA or infinite values
-data <- na.omit(nspp[is.finite(nspp$CPUE..kg.m2.rede.), ])
+data <- na.omit(nspp[is.finite(nspp$CPUE..kg.m..rede.), ])
 
 data <- subset(data, !grepl("TOTAL", ESPÉCIES))
 
 data <- data[data$ESPÉCIES != "Outros", ]
 
 # Calculate the mean and standard deviation for each ESPÉCIES category
-mean_data <- aggregate(CPUE..kg.m2.rede. ~ ESPÉCIES, data = data, FUN = mean)
+mean_data <- aggregate(CPUE..kg.m..rede. ~ ESPÉCIES, data = data, FUN = mean)
 
 # Convert ESPÉCIES to a factor
 mean_data$ESPÉCIES <- factor(mean_data$ESPÉCIES, levels = mean_data$ESPÉCIES)
 
 # Order mean_data by CPUE.Espécie..kg.pescador.dia. in descending order
-mean_data <- mean_data[order(-mean_data$CPUE..kg.m2.rede.), ]
+mean_data <- mean_data[order(-mean_data$CPUE..kg.m..rede.), ]
 
 order_vector <- mean_data$ESPÉCIES
 
-sd_data <- aggregate(CPUE..kg.m2.rede. ~ ESPÉCIES, data = data, FUN = sd)
+sd_data <- aggregate(CPUE..kg.m..rede. ~ ESPÉCIES, data = data, FUN = sd)
 
 par(mfrow=c(4,1), mar=c(6,0,1,0), oma=c(3,6,1,0))
 
@@ -268,14 +268,14 @@ upper_bound <- mean_data$CPUE..kg.m2.rede. + sd_data$CPUE..kg.m2.rede.
 lower_bound <- mean_data$CPUE..kg.m2.rede. - sd_data$CPUE..kg.m2.rede.
 
 # Create the bar plot and capture the midpoints
-bar_mid <- barplot(height = mean_data$CPUE..kg.m2.rede., 
+bar_mid <- barplot(height = mean_data$CPUE..kg.m..rede., 
                    names.arg = mean_data$ESPÉCIES,
                    main = "",
                    xlab = "",
                    ylab = "CPUE (kg/pescador/dia)",
                    col = "black",  # Bar color
                    border = "black",  # Bar border color
-                   ylim = c(0, max(mean_data$CPUE..kg.m2.rede.)),  # Set y-axis limits
+                   ylim = c(0, max(mean_data$CPUE..kg.m..rede.)),  # Set y-axis limits
                    space = 0.2,  # Adjust space between bars
                    las = 2,
                    width = 0.3,
@@ -294,7 +294,7 @@ mtext("Geral", side = 3, line = 0, outer = FALSE, cex = 1.25)
 #       length = 0.05)
 
 #
-nspp<- aggregate(Seq ~ ESPÉCIES+CPUE..kg.m2.rede.+ZONA, data=rendimento, length)
+nspp<- aggregate(Seq ~ ESPÉCIES+CPUE..kg.m..rede.+ZONA, data=rendimento, length)
 
 fluvial_df <- nspp[nspp$ZONA == "Fluvial", ]
 transicao_df <- nspp[nspp$ZONA == "Transição", ]
@@ -302,38 +302,38 @@ lacustre_df <- nspp[nspp$ZONA == "Lacustre", ]
 
 #fluvial
 # Remove rows with NA or infinite values
-data <- na.omit(fluvial_df[is.finite(fluvial_df$CPUE..kg.m2.rede.), ])
+data <- na.omit(fluvial_df[is.finite(fluvial_df$CPUE..kg.m..rede.), ])
 
 data <- subset(data, !grepl("TOTAL", ESPÉCIES))
 
 data <- data[data$ESPÉCIES != "Outros", ]
 
 # Calculate the mean and standard deviation for each ESPÉCIES category
-mean_data <- aggregate(CPUE..kg.m2.rede. ~ ESPÉCIES, data = data, FUN = mean)
+mean_data <- aggregate(CPUE..kg.m..rede. ~ ESPÉCIES, data = data, FUN = mean)
 
 # Convert ESPÉCIES to a factor
 mean_data$ESPÉCIES <- factor(mean_data$ESPÉCIES, levels = mean_data$ESPÉCIES)
 
 # Order mean_data by CPUE.Espécie..kg.pescador.dia. in descending order
-mean_data <- mean_data[order(-mean_data$CPUE..kg.m2.rede.), ]
+mean_data <- mean_data[order(-mean_data$CPUE..kg.m..rede.), ]
 
-sd_data <- aggregate(CPUE..kg.m2.rede. ~ ESPÉCIES, data = data, FUN = sd)
+sd_data <- aggregate(CPUE..kg.m..rede. ~ ESPÉCIES, data = data, FUN = sd)
 
 # Calculate the upper and lower bounds for error bars (assuming they are available)
-upper_bound <- mean_data$CPUE..kg.m2.rede. + sd_data$CPUE..kg.m2.rede.
-lower_bound <- mean_data$CPUE..kg.m2.rede. - sd_data$CPUE..kg.m2.rede.
-upper_bound2<- mean_data$CPUE..kg.m2.rede. + sd_data$CPUE..kg.m2.rede.
+upper_bound <- mean_data$CPUE..kg.m..rede. + sd_data$CPUE..kg.m..rede.
+lower_bound <- mean_data$CPUE..kg.m..rede. - sd_data$CPUE..kg.m..rede.
+upper_bound2<- mean_data$CPUE..kg.m..rede. + sd_data$CPUE..kg.m..rede.
 upper_bound[is.na(upper_bound)] <- 0
 
 # Create the bar plot and capture the midpoints
-bar_mid <- barplot(height = mean_data$CPUE..kg.m2.rede., 
+bar_mid <- barplot(height = mean_data$CPUE..kg.m..rede., 
                    names.arg = mean_data$ESPÉCIES,
                    main = "",
                    xlab = "",
                    ylab = "CPUE (kg/pescador/dia)",
                    col = "deepskyblue",  # Bar color
                    border = "black",  # Bar border color
-                   ylim = c(0, max(mean_data$CPUE..kg.m2.rede.)),  # Set y-axis limits
+                   ylim = c(0, max(mean_data$CPUE..kg.m..rede.)),  # Set y-axis limits
                    space = 0.2,  # Adjust space between bars
                    las = 2,
                    width = 0.3,
@@ -353,38 +353,38 @@ mtext("Fluvial", side = 3, line = 0, outer = FALSE, cex = 1.25)
 
 #transição
 # Remove rows with NA or infinite values
-data <- na.omit(transicao_df[is.finite(transicao_df$CPUE..kg.m2.rede.), ])
+data <- na.omit(transicao_df[is.finite(transicao_df$CPUE..kg.m..rede.), ])
 
 data <- subset(data, !grepl("TOTAL", ESPÉCIES))
 
 data <- data[data$ESPÉCIES != "Outros", ]
 
 # Calculate the mean and standard deviation for each ESPÉCIES category
-mean_data <- aggregate(CPUE..kg.m2.rede. ~ ESPÉCIES, data = data, FUN = mean)
+mean_data <- aggregate(CPUE..kg.m..rede. ~ ESPÉCIES, data = data, FUN = mean)
 
 # Convert ESPÉCIES to a factor
 mean_data$ESPÉCIES <- factor(mean_data$ESPÉCIES, levels = mean_data$ESPÉCIES)
 
 # Order mean_data by CPUE.Espécie..kg.pescador.dia. in descending order
-mean_data <- mean_data[order(-mean_data$CPUE..kg.m2.rede.), ]
+mean_data <- mean_data[order(-mean_data$CPUE..kg.m..rede.), ]
 
-sd_data <- aggregate(CPUE..kg.m2.rede. ~ ESPÉCIES, data = data, FUN = sd)
+sd_data <- aggregate(CPUE..kg.m..rede. ~ ESPÉCIES, data = data, FUN = sd)
 
 # Calculate the upper and lower bounds for error bars (assuming they are available)
-upper_bound <- mean_data$CPUE..kg.m2.rede. + sd_data$CPUE..kg.m2.rede.
-lower_bound <- mean_data$CPUE..kg.m2.rede. - sd_data$CPUE..kg.m2.rede.
-upper_bound2<- mean_data$CPUE..kg.m2.rede. + sd_data$CPUE..kg.m2.rede.
+upper_bound <- mean_data$CPUE..kg.m..rede. + sd_data$CPUE..kg.m..rede.
+lower_bound <- mean_data$CPUE..kg.m..rede. - sd_data$CPUE..kg.m..rede.
+upper_bound2<- mean_data$CPUE..kg.m..rede. + sd_data$CPUE..kg.m..rede.
 upper_bound[is.na(upper_bound)] <- 0
 
 # Create the bar plot and capture the midpoints
-bar_mid <- barplot(height = mean_data$CPUE..kg.m2.rede., 
+bar_mid <- barplot(height = mean_data$CPUE..kg.m..rede., 
                    names.arg = mean_data$ESPÉCIES,
                    main = "",
                    xlab = "",
                    ylab = "CPUE (kg/pescador/dia)",
                    col = "red",  # Bar color
                    border = "black",  # Bar border color
-                   ylim = c(0, max(mean_data$CPUE..kg.m2.rede.)),  # Set y-axis limits
+                   ylim = c(0, max(mean_data$CPUE..kg.m..rede.)),  # Set y-axis limits
                    space = 0.2,  # Adjust space between bars
                    las = 2,
                    width = 0.3,
@@ -404,38 +404,38 @@ mtext("Transição", side = 3, line = 0, outer = FALSE, cex = 1.25)
 
 #lacustre
 # Remove rows with NA or infinite values
-data <- na.omit(lacustre_df[is.finite(lacustre_df$CPUE..kg.m2.rede.), ])
+data <- na.omit(lacustre_df[is.finite(lacustre_df$CPUE..kg.m..rede.), ])
 
 data <- subset(data, !grepl("TOTAL", ESPÉCIES))
 
 data <- data[data$ESPÉCIES != "Outros", ]
 
 # Calculate the mean and standard deviation for each ESPÉCIES category
-mean_data <- aggregate(CPUE..kg.m2.rede. ~ ESPÉCIES, data = data, FUN = mean)
+mean_data <- aggregate(CPUE..kg.m..rede. ~ ESPÉCIES, data = data, FUN = mean)
 
 # Convert ESPÉCIES to a factor
 mean_data$ESPÉCIES <- factor(mean_data$ESPÉCIES, levels = mean_data$ESPÉCIES)
 
 # Order mean_data by CPUE.Espécie..kg.pescador.dia. in descending order
-mean_data <- mean_data[order(-mean_data$CPUE..kg.m2.rede.), ]
+mean_data <- mean_data[order(-mean_data$CPUE..kg.m..rede.), ]
 
-sd_data <- aggregate(CPUE..kg.m2.rede. ~ ESPÉCIES, data = data, FUN = sd)
+sd_data <- aggregate(CPUE..kg.m..rede. ~ ESPÉCIES, data = data, FUN = sd)
 
 # Calculate the upper and lower bounds for error bars (assuming they are available)
-upper_bound <- mean_data$CPUE..kg.m2.rede. + sd_data$CPUE..kg.m2.rede.
-lower_bound <- mean_data$CPUE..kg.m2.rede. - sd_data$CPUE..kg.m2.rede.
-upper_bound2<- mean_data$CPUE..kg.m2.rede. + sd_data$CPUE..kg.m2.rede.
+upper_bound <- mean_data$CPUE..kg.m..rede. + sd_data$CPUE..kg.m..rede.
+lower_bound <- mean_data$CPUE..kg.m..rede. - sd_data$CPUE..kg.m..rede.
+upper_bound2<- mean_data$CPUE..kg.m..rede. + sd_data$CPUE..kg.m..rede.
 upper_bound[is.na(upper_bound)] <- 0
 
 # Create the bar plot and capture the midpoints
-bar_mid <- barplot(height = mean_data$CPUE..kg.m2.rede., 
+bar_mid <- barplot(height = mean_data$CPUE..kg.m..rede., 
                    names.arg = mean_data$ESPÉCIES,
                    main = "",
                    xlab = "",
                    ylab = "CPUE (kg/pescador/dia)",
                    col = "chartreuse3",  # Bar color
                    border = "black",  # Bar border color
-                   ylim = c(0, max(mean_data$CPUE..kg.m2.rede.)),  # Set y-axis limits
+                   ylim = c(0, max(mean_data$CPUE..kg.m..rede.)),  # Set y-axis limits
                    space = 0.2,  # Adjust space between bars
                    las = 2,
                    width = 0.3,
@@ -453,7 +453,7 @@ mtext("Lacustre", side = 3, line = 0, outer = FALSE, cex = 1.25)
 #       code = 3, 
 #       length = 0.05)
 
-mtext("CPUE: kg/m² de rede/dia", side=2, line=3, outer=T, cex=1.25)
+mtext("CPUE: kg/m² de rede/dia", side=2, line=3.3, outer=T, cex=1.25)
 
 ############
 ## espécies por região
