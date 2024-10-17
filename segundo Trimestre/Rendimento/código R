@@ -521,6 +521,8 @@ wide_data <- wide_data[!(wide_data$Espécies %in% c("TOTAL", NA)), ]
 
 wide_data$kg <- as.numeric(as.character(wide_data$kg))
 wide_data$Lacustre <- as.numeric(as.character(wide_data$Lacustre))
+wide_data$Transição <- as.numeric(as.character(wide_data$Transição))
+wide_data$Fluvial <- as.numeric(as.character(wide_data$Fluvial))
 
 wide_data <- mutate(wide_data, Lacustre2 = kg * Lacustre)
 wide_data <- mutate(wide_data, Transição2 = kg * Transição)
@@ -543,6 +545,8 @@ total_row <- data.frame(Espécies = "TOTAL", t(total_row))
 
 # Bind the total row to the existing data frame
 wide_data <- rbind(wide_data, total_row)
+
+wide_data <- na.omit(wide_data)
 
 sum_by_species <- wide_data %>%
   group_by(Espécies) %>%
