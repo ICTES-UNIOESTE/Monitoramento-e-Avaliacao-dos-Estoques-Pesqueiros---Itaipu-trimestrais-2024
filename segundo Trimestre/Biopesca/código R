@@ -1,12 +1,12 @@
 # Biopesca tri 2, 2024####
 rm()
-setwd("C:/Users/lg_ri/Dropbox/Postdoc/UNIOESTE/Relatórios Itaipu/R biopesca/Trimestral 2024")
+setwd("C:/Users/lg_ri/Dropbox/Postdoc/UNIOESTE/Relatórios Itaipu/R biopesca/Trimestral 2 2024")
 library(readxl)
 library(vegan)
 library(dplyr)
 library(ggplot2)
 library(openxlsx)
-BioJuAg23 <- data.frame(read_xlsx("Biopesca Primeiro trimestre 2024.xlsx", sheet="Primeiro Trimestral 2024"))
+BioJuAg23 <- data.frame(read_xlsx("Biopesca segundo trimestre 2024.xlsx", sheet="Segundo trimestre 2024"))
 #Ord <- levels(factor(BioJuAg23$Ordem))
 #Fam <- levels(factor(BioJuAg23$Familia))
 Spp <- levels(factor(BioJuAg23$Espécie))
@@ -109,6 +109,9 @@ colnames(overall_summary)<-c("Pescado", "Preço", "Zona")
 # Zona-specific summary data frame
 zona_summary <- aggregate(Preço~Pescado + Zona, data = Preco, 
                           FUN = function(x) c(mean = mean(x), sd = sd(x)))
+
+mean(zona_summary [, 3], na.rm = TRUE)
+mean_preco_by_zone <- aggregate(zona_summary[,3] ~ Zona, data=zona_summary, FUN=mean, na.rm=TRUE)
 
 # Order zona_summary by Pescado
 zona_summary <- zona_summary %>% 
@@ -246,6 +249,13 @@ colnames(overall_summary)<-c("Pescado", "Preço", "Zona")
 # Zona-specific summary data frame
 zona_summary <- aggregate(Preço~Pescado + Zona, data = Preco, 
                           FUN = function(x) c(mean = mean(x), sd = sd(x)))
+
+zona_summary1 <- aggregate(Preço~Pescado + Zona, data = Preco, 
+                           FUN = function(x) c(mean = mean(x)))
+
+mean(zona_summary1 [, 3], na.rm = TRUE)
+mean_preco_by_zone <- aggregate(zona_summary1[,3] ~ Zona, data=zona_summary, FUN=mean, na.rm=TRUE)
+
 
 # Order zona_summary by Pescado
 zona_summary <- zona_summary %>% 
@@ -389,6 +399,13 @@ zona_summary <- aggregate(Preço~Pescado + Zona, data = Preco,
 zona_summary <- zona_summary %>% 
   arrange(Pescado)
 
+zona_summary1 <- aggregate(Preço~Pescado + Zona, data = Preco, 
+                           FUN = function(x) c(mean = mean(x)))
+
+mean(zona_summary1 [, 3], na.rm = TRUE)
+mean_preco_by_zone <- aggregate(zona_summary1[,3] ~ Zona, data=zona_summary, FUN=mean, na.rm=TRUE)
+
+
 # Define the complete set of Genero and Zona combinations
 complete_set <- expand.grid(Pescado = unique(zona_summary$Pescado), 
                             Zona = c("Fluvial", "Transição", "Lacustre"))
@@ -527,6 +544,13 @@ zona_summary <- aggregate(Preço~Pescado + Zona, data = Preco,
 zona_summary <- zona_summary %>% 
   arrange(Pescado)
 
+zona_summary1 <- aggregate(Preço~Pescado + Zona, data = Preco, 
+                          FUN = function(x) c(mean = mean(x)))
+
+mean(zona_summary1 [, 3], na.rm = TRUE)
+mean_preco_by_zone <- aggregate(zona_summary1[,3] ~ Zona, data=zona_summary, FUN=mean, na.rm=TRUE)
+
+
 # Define the complete set of Genero and Zona combinations
 complete_set <- expand.grid(Pescado = unique(zona_summary$Pescado), 
                             Zona = c("Fluvial", "Transição", "Lacustre"))
@@ -567,6 +591,9 @@ ggplot(zona_summary_complete, aes(x = Pescado, y = zona_summary_complete[,3][,1]
     y = "Preço em reais (média e desvio-padrão)",
     fill = "Zona"
   )
+
+########### SALVAR zona_summary_complete em uma tabela
+
 ###############################################################################################
 
 # CPUE Número ####
@@ -795,7 +822,7 @@ mean_CP <- aggregate(CP ~ Espécie + Zona, data=BioJuAg23, FUN=mean, na.rm=TRUE)
 mean_CP
 # Merge the calculated mean CP with the TabParametros2 data frame
 TabParametros2 <- merge(TabParametros2, mean_CP, by=c("Espécie", "Zona"), all.x=TRUE)
-
+mean(TabParametros2[, 4], na.rm = TRUE)
 mean_CP_by_zone <- aggregate(CP.y ~ Zona, data=TabParametros2, FUN=mean, na.rm=TRUE)
 
 TabParametros2 <-as.data.frame(TabParametros2)
