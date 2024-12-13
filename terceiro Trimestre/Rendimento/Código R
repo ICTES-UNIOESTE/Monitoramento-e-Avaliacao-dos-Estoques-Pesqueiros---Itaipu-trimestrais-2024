@@ -9,7 +9,7 @@ library(ggplot2)
 library(openxlsx)
 library(ggrepel)
 library(lubridate)
-rendimento <- data.frame(read_xlsx("Rendimento março a agosto de 2024.xlsx", sheet="Banco de dados"))
+rendimento <- data.frame(read_xlsx("Rendimento - Setembro e Outubro 2024.xlsx", sheet="Banco de dados"))
 rendimento$DATA <-as.Date(rendimento$DATA, format = "%d/%m/%Y") # Data em (mmm aaaa)
 rendimento$Seq <- seq(nrow(rendimento))
 
@@ -239,6 +239,12 @@ mtext("CPUE: kg/pescador/dia", side=2, line=3, outer=T, cex=1.25)
 ########
 ####
 
+########### SAVE AS 1000 x 1000
+#
+#############
+########
+####
+
 nspp<- aggregate(Seq ~ ESPÉCIES+CPUE..kg.m..rede., data=rendimento, length)
 
 # Remove rows with NA or infinite values
@@ -264,8 +270,8 @@ sd_data <- aggregate(CPUE..kg.m..rede. ~ ESPÉCIES, data = data, FUN = sd)
 par(mfrow=c(4,1), mar=c(6,0,1,0), oma=c(3,6,1,0))
 
 # Calculate the upper and lower bounds for error bars (assuming they are available)
-upper_bound <- mean_data$CPUE..kg.m2.rede. + sd_data$CPUE..kg.m2.rede.
-lower_bound <- mean_data$CPUE..kg.m2.rede. - sd_data$CPUE..kg.m2.rede.
+upper_bound <- mean_data$CPUE..kg.m..rede. + sd_data$CPUE..kg.m..rede.
+lower_bound <- mean_data$CPUE..kg.m..rede. - sd_data$CPUE..kg.m..rede.
 
 # Create the bar plot and capture the midpoints
 bar_mid <- barplot(height = mean_data$CPUE..kg.m..rede., 
@@ -453,7 +459,7 @@ mtext("Lacustre", side = 3, line = 0, outer = FALSE, cex = 1.25)
 #       code = 3, 
 #       length = 0.05)
 
-mtext("CPUE: kg/m² de rede/dia", side=2, line=3.3, outer=T, cex=1.25)
+mtext("CPUE: kg/m² de rede/dia", side=2, line=4, outer=T, cex=1.25)
 
 ############
 ## espécies por região
