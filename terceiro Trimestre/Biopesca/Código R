@@ -17,7 +17,7 @@ Spp <- levels(factor(BioJuAg23$Espécie))
 BioJuAg23$Mes <- format(BioJuAg23$Data, "%b %Y") # Data em (mmm aaaa)
 BioJuAg23$Seq <- seq(nrow(BioJuAg23))
 
-###########################################################################################
+88888###########################################################################################
 #PARTICULAR INTEIRO (PREÇO)
 Preco<-BioJuAg23[BioJuAg23$Preço.Inteiro..Particular.>0,]
 Preco<-Preco[-which(is.na(Preco$Preço.Inteiro..Particular.)),c("Zona","Espécie","Preço.Inteiro..Particular.")]
@@ -752,11 +752,17 @@ abline(v=mean(BioJuAg23$CP, na.rm=T), col="black",lty=1, lwd=3)
 hist(BioJuAg23$CP[BioJuAg23$Zona=="Fluvial"], main="",col = "#009241", breaks=x$breaks, xaxt="n")
 mtext("Fluvial", side=3, line=0, outer=F, cex=1.25)
 abline(v=mean(BioJuAg23$CP[BioJuAg23$Zona=="Fluvial"], na.rm=T), col="black",lty=1, lwd=3)
+mean(BioJuAg23$CP[BioJuAg23$Zona=="Fluvial"], na.rm=T)
+
 hist(BioJuAg23$CP[BioJuAg23$Zona=="Transição"], main="",col = "#da2420", breaks=x$breaks, xaxt="n")
 mtext("Transição", side=3, line=0, outer=F, cex=1.25)
 abline(v=mean(BioJuAg23$CP[BioJuAg23$Zona=="Transição"], na.rm=T), col="black",lty=1, lwd=3)
+mean(BioJuAg23$CP[BioJuAg23$Zona=="Transição"], na.rm=T)
+
 hist(BioJuAg23$CP[BioJuAg23$Zona=="Lacustre"], main="",col = "#045e9a", xlab=, breaks=x$breaks)
 abline(v=mean(BioJuAg23$CP[BioJuAg23$Zona=="Lacustre"], na.rm=T), col="black",lty=1, lwd=3)
+mean(BioJuAg23$CP[BioJuAg23$Zona=="Lacustre"], na.rm=T)
+
 mtext("Lacustre", side=3, line=0, outer=F, cex=1.25)
 mtext("Comprimento Padrão (cm)", side=1, line=2, outer=T, cex=1.25)
 mtext("Frequência (Número de indivíduos)", side=2, line=3, outer=T, cex=1.25)
@@ -829,6 +835,7 @@ mean_CP
 TabParametros2 <- merge(TabParametros2, mean_CP, by=c("Espécie", "Zona"), all.x=TRUE)
 mean(TabParametros2[, 4], na.rm = TRUE)
 mean_CP_by_zone <- aggregate(CP.y ~ Zona, data=TabParametros2, FUN=mean, na.rm=TRUE)
+mean_CP_by_zone
 
 TabParametros2 <-as.data.frame(TabParametros2)
 TabParametros2$Espécie <- rownames(TabParametros2)
